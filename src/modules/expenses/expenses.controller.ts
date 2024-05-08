@@ -19,8 +19,8 @@ class ExpensesController {
     res.sendStatus(HttpStatus.CREATED)
   }
 
-  @Get(':id')
-  async findExpense(@Param('id') id: string): Promise<ExpenseDTO> {
+  @Get(":id")
+  async findExpense(@Param("id") _id: string): Promise<ExpenseDTO> {
     return {} as any
   }
 
@@ -30,14 +30,14 @@ class ExpensesController {
   }
 
   @Put(":id")
-  async updateExpense(@Param('id') id: string): Promise<ExpenseDTO> {
+  async updateExpense(@Param("id") _id: string): Promise<ExpenseDTO> {
     return {} as any
   }
 
   @Delete(":id")
   async deleteExpense(
     @Response() res: ExpressResponse,
-    @Param('id') id: string
+    @Param("id") _id: string,
   ) {
     res.sendStatus(HttpStatus.NO_CONTENT)
   }

@@ -17,10 +17,10 @@ class User extends BaseEntity {
 
   @Column()
   email: string
-  
+
   @CreateDateColumn()
   cretedAt: Date
-  
+
   @UpdateDateColumn()
   updatedAt: Date
 }

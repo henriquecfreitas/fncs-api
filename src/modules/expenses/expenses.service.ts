@@ -12,10 +12,9 @@ class ExpensesService {
     private expensesRepository: Repository<Expense>,
   ) {}
 
-  async createExpense(expense: NewExpenseDTO) {
-  }
+  async createExpense(_expense: NewExpenseDTO) {}
 
-  async findExpense(id: string): Promise<ExpenseDTO> {
+  async findExpense(_id: string): Promise<ExpenseDTO> {
     return {} as any
   }
 
@@ -24,14 +23,13 @@ class ExpensesService {
   }
 
   async updateExpense(
-    id: string,
-    newData: UpdateExpenseDTO,
+    _id: string,
+    _newData: UpdateExpenseDTO,
   ): Promise<ExpenseDTO> {
     return {} as any
   }
 
-  async deleteExpense(id: string) {
-  }
+  async deleteExpense(_id: string) {}
 }
 
 export default ExpensesService

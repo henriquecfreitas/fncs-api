@@ -5,11 +5,11 @@ class UpdateExpenseDTO {
   @Length(1, 191)
   @Optional()
   description?: string
-  
+
   @IsPositive()
   @Optional()
   value?: number
-  
+
   @IsDateString()
   @Optional()
   date?: Date
