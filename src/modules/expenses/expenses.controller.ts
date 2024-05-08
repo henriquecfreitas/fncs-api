@@ -30,7 +30,8 @@ class ExpensesController {
     @Response() res: ExpressResponse,
     @Body() body: NewExpenseDTO,
   ) {
-    await this.expensesService.createExpense(body)
+    const { user } = req
+    await this.expensesService.createExpense(body, user)
     res.sendStatus(HttpStatus.CREATED)
   }
 
@@ -39,14 +40,16 @@ class ExpensesController {
     @Request() req: AuthenticatedRequest,
     @Param("id") id: string,
   ): Promise<ExpenseDTO> {
-    return this.expensesService.findExpense(id)
+    const { user } = req
+    return this.expensesService.findExpense(id, user)
   }
 
   @Get()
   async listExpenses(
     @Request() req: AuthenticatedRequest,
   ): Promise<Array<ExpenseDTO>> {
-    return this.expensesService.listExpenses()
+    const { user } = req
+    return this.expensesService.listExpenses(user)
   }
 
   @Put(":id")
@@ -55,7 +58,8 @@ class ExpensesController {
     @Param("id") id: string,
     @Body() body: UpdateExpenseDTO,
   ): Promise<ExpenseDTO> {
-    return this.expensesService.updateExpense(id, body)
+    const { user } = req
+    return this.expensesService.updateExpense(id, body, user)
   }
 
   @Delete(":id")
@@ -64,7 +68,8 @@ class ExpensesController {
     @Response() res: ExpressResponse,
     @Param("id") id: string,
   ) {
-    await this.expensesService.deleteExpense(id)
+    const { user } = req
+    await this.expensesService.deleteExpense(id, user)
     res.sendStatus(HttpStatus.NO_CONTENT)
   }
 }

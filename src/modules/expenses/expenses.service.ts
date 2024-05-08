@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 
 import { ExpenseDTO, NewExpenseDTO, UpdateExpenseDTO } from "src/dtos"
-import { Expense } from "src/entities"
+import { Expense, User } from "src/entities"
 
 @Injectable()
 class ExpensesService {
@@ -12,7 +12,7 @@ class ExpensesService {
     private readonly expensesRepository: Repository<Expense>,
   ) {}
 
-  async createExpense(data: NewExpenseDTO) {
+  async createExpense(data: NewExpenseDTO, user: User) {
     const { description, value } = data
     const date = new Date(data.date)
     if (date > new Date()) throw new Error("Invalid Date")
@@ -21,13 +21,13 @@ class ExpensesService {
       description,
       value,
       date,
-      user: { id: "aux" } as any,
+      user,
     })
   }
 
-  async findExpense(id: string): Promise<ExpenseDTO> {
+  async findExpense(id: string, user: User): Promise<ExpenseDTO> {
     const expense = await this.expensesRepository.findOne({
-      where: { id },
+      where: { id, user: { id: user.id } },
       relations: { user: true },
     })
     if (!expense) throw new NotFoundException()
@@ -35,8 +35,9 @@ class ExpensesService {
     return new ExpenseDTO(expense)
   }
 
-  async listExpenses(): Promise<Array<ExpenseDTO>> {
+  async listExpenses(user: User): Promise<Array<ExpenseDTO>> {
     const expenses = await this.expensesRepository.find({
+      where: { user: { id: user.id } },
       relations: { user: true },
     })
     return expenses.map(expense => new ExpenseDTO(expense))
@@ -45,9 +46,10 @@ class ExpensesService {
   async updateExpense(
     id: string,
     newData: UpdateExpenseDTO,
+    user: User,
   ): Promise<ExpenseDTO> {
     const expense = await this.expensesRepository.findOne({
-      where: { id },
+      where: { id, user: { id: user.id } },
       relations: { user: true },
     })
     if (!expense) throw new NotFoundException()
@@ -61,8 +63,8 @@ class ExpensesService {
     return new ExpenseDTO(expense)
   }
 
-  async deleteExpense(id: string) {
-    await this.expensesRepository.delete({ id })
+  async deleteExpense(id: string, user: User) {
+    await this.expensesRepository.delete({ id, user: { id: user.id } })
   }
 }
 
