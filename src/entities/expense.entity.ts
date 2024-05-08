@@ -13,7 +13,7 @@ import User from "./user.entity"
 @Entity()
 class Expense extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
-  id: number
+  id: string
 
   @ManyToOne(_ => User)
   user: User
@@ -21,7 +21,7 @@ class Expense extends BaseEntity {
   @Column("text")
   description: string
 
-  @Column()
+  @Column("double")
   value: number
 
   @Column("date")

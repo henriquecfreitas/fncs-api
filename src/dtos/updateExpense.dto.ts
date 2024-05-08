@@ -1,17 +1,16 @@
-import { Optional } from "@nestjs/common"
-import { IsDateString, IsPositive, Length } from "class-validator"
+import { IsDateString, IsOptional, IsPositive, Length } from "class-validator"
 
 class UpdateExpenseDTO {
   @Length(1, 191)
-  @Optional()
+  @IsOptional()
   description?: string
 
   @IsPositive()
-  @Optional()
+  @IsOptional()
   value?: number
 
-  @IsDateString()
-  @Optional()
+  @IsDateString({ strict: true })
+  @IsOptional()
   date?: Date
 }
 

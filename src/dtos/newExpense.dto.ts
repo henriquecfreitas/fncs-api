@@ -7,7 +7,7 @@ class NewExpenseDTO {
   @IsPositive()
   value: number
 
-  @IsDateString()
+  @IsDateString({ strict: true })
   date: Date
 }
 
