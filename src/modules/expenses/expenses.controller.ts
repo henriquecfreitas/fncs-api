@@ -8,18 +8,25 @@ import {
   Param,
   Post,
   Put,
+  Request,
   Response,
+  UseGuards,
 } from "@nestjs/common"
 
+import { AuthGuard } from "src/guards"
 import { NewExpenseDTO, ExpenseDTO, UpdateExpenseDTO } from "src/dtos"
+
 import ExpensesService from "./expenses.service"
+import { AuthenticatedRequest } from "src/types"
 
 @Controller("expenses")
+@UseGuards(AuthGuard)
 class ExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
   async createExpense(
+    @Request() req: AuthenticatedRequest,
     @Response() res: ExpressResponse,
     @Body() body: NewExpenseDTO,
   ) {
@@ -28,17 +35,23 @@ class ExpensesController {
   }
 
   @Get(":id")
-  async findExpense(@Param("id") id: string): Promise<ExpenseDTO> {
+  async findExpense(
+    @Request() req: AuthenticatedRequest,
+    @Param("id") id: string,
+  ): Promise<ExpenseDTO> {
     return this.expensesService.findExpense(id)
   }
 
   @Get()
-  async listExpenses(): Promise<Array<ExpenseDTO>> {
+  async listExpenses(
+    @Request() req: AuthenticatedRequest,
+  ): Promise<Array<ExpenseDTO>> {
     return this.expensesService.listExpenses()
   }
 
   @Put(":id")
   async updateExpense(
+    @Request() req: AuthenticatedRequest,
     @Param("id") id: string,
     @Body() body: UpdateExpenseDTO,
   ): Promise<ExpenseDTO> {
@@ -47,6 +60,7 @@ class ExpensesController {
 
   @Delete(":id")
   async deleteExpense(
+    @Request() req: AuthenticatedRequest,
     @Response() res: ExpressResponse,
     @Param("id") id: string,
   ) {

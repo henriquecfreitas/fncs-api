@@ -18,6 +18,9 @@ class User extends BaseEntity {
   @Column()
   email: string
 
+  @Column()
+  passwordHash: string
+
   @CreateDateColumn()
   cretedAt: Date
 
