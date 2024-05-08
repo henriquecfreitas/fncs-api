@@ -1,0 +1,5 @@
+export { default as ExpenseDTO } from "./expense.dto" 
+export { default as LoginDTO } from "./login.dto" 
+export { default as NewExpenseDTO } from "./newExpense.dto" 
+export { default as NewUserDTO } from "./newUser.dto" 
+export { default as UpdateExpenseDTO } from "./updateExpense.dto"
