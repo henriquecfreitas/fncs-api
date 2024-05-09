@@ -1,5 +1,9 @@
 import { Repository } from "typeorm"
-import { Injectable, NotFoundException } from "@nestjs/common"
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 
 import { ExpenseDTO, NewExpenseDTO, UpdateExpenseDTO } from "src/dtos"
@@ -16,7 +20,7 @@ class ExpensesService {
   async createExpense(data: NewExpenseDTO, user: User) {
     const { description, value } = data
     const date = new Date(data.date)
-    if (date > new Date()) throw new Error("Invalid Date")
+    if (date > new Date()) throw new BadRequestException("Invalid Date")
 
     await this.expensesRepository.insert({
       description,
@@ -67,8 +71,10 @@ class ExpensesService {
     if (!expense) throw new NotFoundException()
 
     Object.entries(newData).forEach(([key, value]) => {
-      if (key === "date") expense.date = new Date(value)
-      else expense[key] = value
+      if (key === "date") {
+        if (value > new Date()) throw new BadRequestException("Invalid Date")
+        expense.date = new Date(value)
+      } else expense[key] = value
     })
     await this.expensesRepository.save(expense)
 
