@@ -13,7 +13,7 @@ describe("UsersController", () => {
 
   let usersController: UsersController
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const Users: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
@@ -23,7 +23,9 @@ describe("UsersController", () => {
       .compile()
 
     usersController = Users.get<UsersController>(UsersController)
+  })
 
+  beforeEach(async () => {
     res.sendStatus = jest.fn()
 
     usersService.newUser.mockClear()

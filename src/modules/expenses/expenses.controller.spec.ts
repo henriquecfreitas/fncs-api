@@ -28,7 +28,7 @@ describe("ExpensesController", () => {
 
   let expensesController: ExpensesController
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const Expenses: TestingModule = await Test.createTestingModule({
       controllers: [ExpensesController],
       providers: [ExpensesService],
@@ -40,7 +40,9 @@ describe("ExpensesController", () => {
       .compile()
 
     expensesController = Expenses.get<ExpensesController>(ExpensesController)
+  })
 
+  beforeEach(async () => {
     res.sendStatus = jest.fn()
 
     jest.clearAllMocks()

@@ -13,7 +13,7 @@ describe("AuthController", () => {
 
   let authController: AuthController
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const auth: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
       providers: [AuthService],
@@ -23,7 +23,9 @@ describe("AuthController", () => {
       .compile()
 
     authController = auth.get<AuthController>(AuthController)
+  })
 
+  beforeEach(async () => {
     res.send = jest.fn()
     res.setHeader = jest.fn()
 
