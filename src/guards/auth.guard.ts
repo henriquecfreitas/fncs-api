@@ -21,8 +21,11 @@ class AuthGuard implements CanActivate {
   }
 
   private async validateAuthRequest(request: Request) {
-    const accessToken = request.headers?.["access-token"]
-    if (!accessToken || typeof accessToken !== "string") return false
+    const authorization = request.headers?.authorization
+    if (!authorization || typeof authorization !== "string") return false
+
+    const [_, accessToken] = authorization.split("Bearer ")
+    if (!accessToken) return false
 
     const payload = await validateToken(accessToken)
     if (!payload) return false
