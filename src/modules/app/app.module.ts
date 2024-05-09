@@ -7,7 +7,6 @@ import { ExpensesModule } from "src/modules/expenses/expenses.module"
 import { UsersModule } from "src/modules/users/users.module"
 
 import { AppController } from "./app.controller"
-import { AppService } from "./app.service"
 
 @Module({
   imports: [
@@ -26,6 +25,6 @@ import { AppService } from "./app.service"
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}

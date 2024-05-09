@@ -1,22 +1,28 @@
+import { Response } from "express"
 import { Test, TestingModule } from "@nestjs/testing"
+
 import { AppController } from "./app.controller"
-import { AppService } from "./app.service"
 
 describe("AppController", () => {
+  const res = {} as Response;
   let appController: AppController
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [],
     }).compile()
 
     appController = app.get<AppController>(AppController)
+
+    res.sendStatus = jest.fn()
   })
 
-  describe("root", () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe("Hello World!")
+  describe("Health Check", () => {
+    it('Should send 204 status code', () => {
+      const response = appController.healthCheck(res)
+      expect(response).toBeUndefined()
+      expect(res.sendStatus).toHaveBeenCalledWith(204)
     })
   })
 })

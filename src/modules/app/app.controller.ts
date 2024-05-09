@@ -1,12 +1,13 @@
-import { Controller, Get } from "@nestjs/common"
-import { AppService } from "./app.service"
+import { Response as ExpressResponse } from "express"
+import { ApiNoContentResponse, ApiOperation } from "@nestjs/swagger"
+import { Controller, Get, HttpStatus, Response } from "@nestjs/common"
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
   @Get()
-  getHello(): string {
-    return this.appService.getHello()
+  @ApiOperation({ summary: "API Health Check" })
+  @ApiNoContentResponse({ description: "API is running" })
+  healthCheck(@Response() res: ExpressResponse) {
+    res.sendStatus(HttpStatus.NO_CONTENT)
   }
 }
