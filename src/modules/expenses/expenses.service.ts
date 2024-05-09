@@ -4,6 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 
 import { ExpenseDTO, NewExpenseDTO, UpdateExpenseDTO } from "src/dtos"
 import { Expense, User } from "src/entities"
+import { sendMail } from "src/utils"
 
 @Injectable()
 class ExpensesService {
@@ -23,6 +24,19 @@ class ExpensesService {
       date,
       user,
     })
+
+    try {
+      await sendMail({
+        to: user.email,
+        subject: "FNCS | New Expense",
+        text:
+          `A new expense has been inserted for your FNCS account: ${description}`,
+        htlm:
+          `A new expense has been inserted for your FNCS account.<br><b>${description}</b><br><sub>FNCS | 2024</sub>`,
+      })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   async findExpense(id: string, user: User): Promise<ExpenseDTO> {
