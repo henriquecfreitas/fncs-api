@@ -12,7 +12,7 @@ import {
   Response,
   UseGuards,
 } from "@nestjs/common"
-import { ApiBasicAuth, ApiHeader, ApiHeaders, ApiResponse, ApiTags } from "@nestjs/swagger"
+import { ApiBasicAuth, ApiResponse, ApiTags } from "@nestjs/swagger"
 
 import { AuthGuard } from "src/guards"
 import { NewExpenseDTO, ExpenseDTO, UpdateExpenseDTO } from "src/dtos"
@@ -116,7 +116,7 @@ class ExpensesController {
   @ApiBasicAuth()
   @ApiResponse({
     status: 204,
-    description: "Successfully deleted resource"
+    description: "Successfully deleted resource",
   })
   @ApiResponse({
     status: 401,

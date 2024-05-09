@@ -29,10 +29,8 @@ class ExpensesService {
       await sendMail({
         to: user.email,
         subject: "FNCS | New Expense",
-        text:
-          `A new expense has been inserted for your FNCS account: ${description}`,
-        htlm:
-          `A new expense has been inserted for your FNCS account.<br><b>${description}</b><br><sub>FNCS | 2024</sub>`,
+        text: `A new expense has been inserted for your FNCS account: ${description}`,
+        htlm: `A new expense has been inserted for your FNCS account.<br><b>${description}</b><br><sub>FNCS | 2024</sub>`,
       })
     } catch (e) {
       console.error(e)

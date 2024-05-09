@@ -14,12 +14,12 @@ async function bootstrap() {
   )
 
   const config = new DocumentBuilder()
-    .setTitle('Expenses API')
-    .setDescription('Mock API for expenses management')
-    .setVersion('1.0.0')
-    .addTag('Auth')
-    .addTag('Users')
-    .addTag('Expenses')
+    .setTitle("Expenses API")
+    .setDescription("Mock API for expenses management")
+    .setVersion("1.0.0")
+    .addTag("Auth")
+    .addTag("Users")
+    .addTag("Expenses")
     .addBasicAuth({
       type: "http",
       scheme: "bearer",
@@ -27,10 +27,10 @@ async function bootstrap() {
     })
     .build()
   const document = SwaggerModule.createDocument(app, config, {
-    operationIdFactory: (_: string, methodKey: string) => methodKey
-  });
+    operationIdFactory: (_: string, methodKey: string) => methodKey,
+  })
 
-  SwaggerModule.setup('api-spec', app, document);
+  SwaggerModule.setup("api-spec", app, document)
 
   await app.listen(3000)
 }
