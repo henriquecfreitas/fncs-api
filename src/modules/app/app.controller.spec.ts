@@ -4,7 +4,7 @@ import { Test, TestingModule } from "@nestjs/testing"
 import { AppController } from "./app.controller"
 
 describe("AppController", () => {
-  const res = {} as Response;
+  const res = {} as Response
   let appController: AppController
 
   beforeEach(async () => {
@@ -19,7 +19,7 @@ describe("AppController", () => {
   })
 
   describe("Health Check", () => {
-    it('Should send 204 status code', () => {
+    it("Should send 204 status code", () => {
       const response = appController.healthCheck(res)
       expect(response).toBeUndefined()
       expect(res.sendStatus).toHaveBeenCalledWith(204)
