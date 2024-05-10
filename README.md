@@ -3,7 +3,7 @@
 Simple Rest API for performing expenses CRUD operations
 
 ## Endpoints Documentation
-Once the app is running its OpenAPI documentation can be accessed throught the Swagger UI at `/api-spec`
+Once the app is running, its OpenAPI documentation can be accessed throught the Swagger UI at `/api-spec`
 
 ## Installation
 
