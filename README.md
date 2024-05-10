@@ -2,14 +2,17 @@
 
 Simple Rest API for performing expenses CRUD operations
 
+## Endpoints Documentation
+Once the app is running its OpenAPI documentation can be accessed throught the Swagger UI at `/api-spec`
+
 ## Installation
 
 ```bash
 $ yarn
-```
 
-## Endpoints Documentation
-Once the app is running its OpenAPI documentation can be accessed throught the Swagger UI at `/api-spec`
+# optional, in case you want to use a containerized MySQL instance 
+$ docker compose up
+```
 
 ## Running the app
 
