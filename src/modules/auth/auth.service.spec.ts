@@ -19,7 +19,6 @@ describe("AuthService", () => {
 
   beforeAll(async () => {
     const auth: TestingModule = await Test.createTestingModule({
-      controllers: [AuthService],
       providers: [
         AuthService,
         {

@@ -8,7 +8,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 
 import { ExpenseDTO, NewExpenseDTO, UpdateExpenseDTO } from "src/dtos"
 import { Expense, User } from "src/entities"
-import { sendMail } from "src/utils"
+import { isFutureDate, sendMail } from "src/utils"
 
 @Injectable()
 class ExpensesService {
@@ -18,14 +18,13 @@ class ExpensesService {
   ) {}
 
   async createExpense(data: NewExpenseDTO, user: User) {
-    const { description, value } = data
-    const date = new Date(data.date)
-    if (date > new Date()) throw new BadRequestException("Invalid Date")
+    const { description, value, date } = data
+    if (isFutureDate(date)) throw new BadRequestException("Invalid Date")
 
     await this.expensesRepository.insert({
       description,
       value,
-      date,
+      date: new Date(date),
       user,
     })
 
@@ -72,7 +71,7 @@ class ExpensesService {
 
     Object.entries(newData).forEach(([key, value]) => {
       if (key === "date") {
-        if (value > new Date()) throw new BadRequestException("Invalid Date")
+        if (isFutureDate(value)) throw new BadRequestException("Invalid Date")
         expense.date = new Date(value)
       } else expense[key] = value
     })
