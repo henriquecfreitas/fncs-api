@@ -22,13 +22,13 @@ class UsersService {
     await this.userRepository.insert({ email, name, passwordHash })
   }
 
-  public hashPassword(userId: string, password: string) {
-    const pwdHashSalt = userId + "BASE_SALT"
+  public hashPassword(email: string, password: string) {
+    const pwdHashSalt = email + "BASE_SALT"
     return hashKey(password, pwdHashSalt)
   }
 
-  public hashPasswordToString(userId: string, password: string) {
-    const passwordHashBuffer = this.hashPassword(userId, password)
+  public hashPasswordToString(email: string, password: string) {
+    const passwordHashBuffer = this.hashPassword(email, password)
     return parseHashBuffer(passwordHashBuffer)
   }
 }
