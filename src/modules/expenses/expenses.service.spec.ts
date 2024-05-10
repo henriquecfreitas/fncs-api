@@ -67,7 +67,7 @@ describe("expensesService", () => {
         to: user.email,
         subject: "FNCS | New Expense",
         text: `A new expense has been inserted for your FNCS account: ${body.description}`,
-        htlm: `A new expense has been inserted for your FNCS account.<br><b>${body.description}</b><br><sub>FNCS | 2024</sub>`,
+        html: `A new expense has been inserted for your FNCS account.<br><b>${body.description}</b><br><sub>FNCS | 2024</sub>`,
       })
     })
 

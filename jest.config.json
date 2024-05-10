@@ -4,7 +4,17 @@
   "modulePaths": ["<rootDir>"],
   "testEnvironment": "node",
   "testRegex": "src\/.+?spec.ts$",
-  "coverageDirectory": "../coverage",
+  "coverageDirectory": "./coverage",
+  "coveragePathIgnorePatterns": [
+    "coverage",
+    "dist",
+    "node_modules",
+    "test",
+    "jwt.ts",
+    ".index.ts",
+    ".dto.ts",
+    ".entity.ts"
+  ],
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
   }

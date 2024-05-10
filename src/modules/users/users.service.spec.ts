@@ -80,7 +80,9 @@ describe("UsersService", () => {
         expect(error).toBeInstanceOf(UnprocessableEntityException)
       }
 
-      expect(userRepository.existsBy).toHaveBeenCalledWith({ email: body.email })
+      expect(userRepository.existsBy).toHaveBeenCalledWith({
+        email: body.email,
+      })
     })
   })
 })

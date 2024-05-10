@@ -7,7 +7,7 @@ type EmailContent = {
   to: string
   subject: string
   text: string
-  htlm?: string
+  html?: string
 }
 
 export async function sendMail(content: EmailContent) {
