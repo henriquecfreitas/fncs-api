@@ -5,7 +5,7 @@ Simple Rest API for performing expenses CRUD operations
 ## Installation
 
 ```bash
-$ yarn install
+$ yarn
 ```
 
 ## Endpoints Documentation
